@@ -43,10 +43,7 @@ def extract_candidates_embedding_for_doc(embedding_distrib, inp_rpr):
     each row is the embedding of one candidate phrase
     """
     ## candidates = np.array(extract_candidates(inp_rpr))
-    embed_tags = {} # List of candidates based on PosTag rules
-    for tag in BACKGROUND_TAGS:
-        embed_tags[tag] = embedding_distrib.model.embed_sentence(tag)
-    embed_tags = np.array(list(embed_tags))
+    embed_tags = np.array(BACKGROUND_TAGS)
     if len(embed_tags) > 0:
         embeddings = np.array(embedding_distrib.get_tokenized_sents_embeddings(embed_tags)) # Associated embeddings
         valid_candidates_mask = ~np.all(embeddings == 0, axis=1)  # Only candidates which are not unknown.

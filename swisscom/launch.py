@@ -37,7 +37,7 @@ def load_local_embedding_distributor():
     config_parser = ConfigParser()
     config_parser.read("../swisscom/config.ini")
     sent2vec_model_path = config_parser.get('SENT2VEC', 'model_path')
-    return EmbeddingDistributorLocal(sent2vec_model_path)
+    return EmbeddingDistributorLocal()
 
 
 def load_local_corenlp_pos_tagger():
