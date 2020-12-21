@@ -8,7 +8,7 @@ import numpy as np
 from swisscom_ai.research_keyphrase.model.extractor import extract_candidates, extract_sent_candidates
 
 
-BACKGROUND_TAGS = ["hill", "beach", "mountain", "valley", "city"]
+BACKGROUND_TAGS = ["valley", "hill", "mountain", "city", "sea", "bay", "beach", "forest", "field", "road", "urban", "rural", "highway", "modern building", "historical building", "ancient ruins", "tropics", "desert", "swamp", "lake", "outskirts", "luxury"]
 
 
 def extract_doc_embedding(embedding_distrib, inp_rpr, use_filtered=False):

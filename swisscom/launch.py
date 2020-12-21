@@ -33,11 +33,11 @@ def extract_keyphrases(embedding_distrib, ptagger, raw_text, N, lang, beta=0.55,
     return MMRPhrase(embedding_distrib, text_obj, N=N, beta=beta, alias_threshold=alias_threshold)
 
 
-def load_local_embedding_distributor():
+def load_local_embedding_distributor(model_name='roberta-large-nli-stsb-mean-tokens'):
     config_parser = ConfigParser()
     config_parser.read("../swisscom/config.ini")
-    sent2vec_model_path = config_parser.get('SENT2VEC', 'model_path')
-    return EmbeddingDistributorLocal()
+    # sent2vec_model_path = config_parser.get('SENT2VEC', 'model_path')
+    return EmbeddingDistributorLocal(model_name)
 
 
 def load_local_corenlp_pos_tagger():
@@ -46,7 +46,6 @@ def load_local_corenlp_pos_tagger():
     host = config_parser.get('STANFORDCORENLPTAGGER', 'host')
     port = config_parser.get('STANFORDCORENLPTAGGER', 'port')
     return PosTaggingCoreNLP(host, port)
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract keyphrases from raw text')
