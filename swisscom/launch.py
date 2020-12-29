@@ -34,9 +34,11 @@ def extract_keyphrases(embedding_distrib, ptagger, raw_text, N, lang, beta=0.55,
 
 
 def load_local_embedding_distributor(model_name='roberta-large-nli-stsb-mean-tokens'):
-    config_parser = ConfigParser()
-    config_parser.read("../swisscom/config.ini")
-    # sent2vec_model_path = config_parser.get('SENT2VEC', 'model_path')
+    if model_name == 'sent2vec' or model_name == 'fasttext':
+        config_parser = ConfigParser()
+        config_parser.read("../swisscom/config.ini")
+        sent2vec_model_path = config_parser.get('SENT2VEC', 'model_path')
+        return EmbeddingDistributorLocal(sent2vec_model_path, is_static=True)
     return EmbeddingDistributorLocal(model_name)
 
 
