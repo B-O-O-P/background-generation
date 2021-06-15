@@ -70,10 +70,9 @@ def _MMR(embdistrib, text_obj, candidates, X, beta, N, use_filtered, alias_thres
     return candidates[selected_candidates].tolist(), relevance_list, aliases_list
 
 
-def MMRPhrase(embdistrib, text_obj, beta=0.65, N=10, use_filtered=True, alias_threshold=0.8):
+def MMRPhrase(embdistrib, text_obj, tags, beta=0.65, N=10, use_filtered=True, alias_threshold=0.8):
     """
     Extract N keyphrases
-
     :param embdistrib: embedding distributor see @EmbeddingDistributor
     :param text_obj: Input text representation see @InputTextObj
     :param beta: hyperparameter beta for MMR (control tradeoff between informativeness and diversity)
@@ -84,7 +83,7 @@ def MMRPhrase(embdistrib, text_obj, beta=0.65, N=10, use_filtered=True, alias_th
     2)list of associated relevance scores (list of float)
     3)list containing for each keyphrase a list of alias (list of list of string)
     """
-    candidates, X = extract_candidates_embedding_for_doc(embdistrib, text_obj)
+    candidates, X = extract_candidates_embedding_for_doc(embdistrib, tags)
 
     if len(candidates) == 0:
         warnings.warn('No keyphrase extracted for this document')

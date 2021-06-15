@@ -12,10 +12,9 @@ from swisscom.swisscom_ai.research_keyphrase.preprocessing.postagging import Pos
 from swisscom.swisscom_ai.research_keyphrase.util.fileIO import read_file
 
 
-def extract_keyphrases(embedding_distrib, ptagger, raw_text, N, lang, beta=0.55, alias_threshold=0.7):
+def extract_keyphrases(embedding_distrib, ptagger, raw_text, N, lang, tags = [], beta=0.55, alias_threshold=0.7):
     """
     Method that extract a set of keyphrases
-
     :param embedding_distrib: An Embedding Distributor object see @EmbeddingDistributor
     :param ptagger: A Pos Tagger object see @PosTagger
     :param raw_text: A string containing the raw text to extract
@@ -30,7 +29,7 @@ def extract_keyphrases(embedding_distrib, ptagger, raw_text, N, lang, beta=0.55,
     """
     tagged = ptagger.pos_tag_raw_text(raw_text)
     text_obj = InputTextObj(tagged, lang)
-    return MMRPhrase(embedding_distrib, text_obj, N=N, beta=beta, alias_threshold=alias_threshold)
+    return MMRPhrase(embedding_distrib, text_obj, tags=tags, N=N, beta=beta, alias_threshold=alias_threshold)
 
 
 def load_local_embedding_distributor(model_name='roberta-large-nli-stsb-mean-tokens'):
